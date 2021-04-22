@@ -27,8 +27,11 @@ class EmployeesController < ApplicationController
   end
 
   def destroy
-    @employee.destroy
-    head :no_content
+    if @employee.destroy
+      head :no_content
+    else
+      render json: { errors: @employee.errors }, status: :unprocessable_entity 
+    end
   end
 
   private

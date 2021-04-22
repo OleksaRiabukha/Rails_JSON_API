@@ -1,0 +1,333 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/employees":
+    post:
+      summary: Creates an employee
+      tags:
+      - Employees
+      security:
+      - Authorization: {}
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  first_name:
+                    type: string
+                  last_name:
+                    type: string
+                  salary:
+                    type: integer
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                salary:
+                  type: integer
+        required: true
+    get:
+      summary: Show all employees
+      tags:
+      - Employees
+      security:
+      - Authorization: {}
+      responses:
+        '401':
+          description: Unauthorized
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  first_name:
+                    type: string
+                  last_name:
+                    type: string
+                  salary:
+                    type: integer
+  "/api/employees/{id}":
+    put:
+      summary: Update employee details
+      tags:
+      - Employees
+      security:
+      - Authorization: {}
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  first_name:
+                    type: string
+                  last_name:
+                    type: string
+                  salary:
+                    type: integer
+        '400':
+          description: Bad Request
+        '404':
+          description: 'Error: Not Found'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                salary:
+                  type: integer
+        required: true
+    get:
+      summary: Show employee details
+      tags:
+      - Employees
+      security:
+      - Authorization: {}
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  first_name:
+                    type: string
+                  last_name:
+                    type: string
+                  salary:
+                    type: integer
+        '404':
+          description: 'Error: Not Found'
+        '401':
+          description: Unauthorized
+    delete:
+      summary: Deletes employee details
+      tags:
+      - Employees
+      security:
+      - Authorization: {}
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: 'Error: Not Found'
+        '401':
+          description: Unauthorized
+  "/api/users":
+    post:
+      summary: Creates a user
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                      password:
+                        type: string
+                      username:
+                        type: string
+                      token:
+                        type: string
+        '400':
+          description: Bad Request
+        '422':
+          description: 'Error: Unprocessable Entity'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+                    username:
+                      type: string
+        required: true
+  "/api/users/login":
+    post:
+      summary: Login user
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                      password:
+                        type: string
+                      username:
+                        type: string
+                      token:
+                        type: string
+        '422':
+          description: 'Error: Unprocessable Entity'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+                    username:
+                      type: string
+        required: true
+  "/api/user":
+    get:
+      summary: Shows user information
+      tags:
+      - Users
+      security:
+      - Authorization: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                      password:
+                        type: string
+                      username:
+                        type: string
+                      token:
+                        type: string
+        '401':
+          description: Unauthorized
+    put:
+      summary: Updates user information
+      tags:
+      - Users
+      security:
+      - Authorization: {}
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                      password:
+                        type: string
+                      username:
+                        type: string
+                      token:
+                        type: string
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+                    username:
+                      type: string
+servers:
+- url: http://127.0.0.1:3000/
+  variables:
+    defaultHost:
+      default: http://127.0.0.1:3000/
+components:
+  securitySchemes:
+    Authorization:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Specify the token with 'Token' prefix
